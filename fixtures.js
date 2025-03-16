@@ -1,10 +1,10 @@
-var mapnik = require('mapnik');
-var path = require('path');
-var fs = require('fs');
+const mapnik = require('mapnik');
+const path = require('path');
+const fs = require('fs');
 
 mapnik.register_datasource(path.join(mapnik.settings.paths.input_plugins, 'geojson.input'));
 
-var fixtures = {
+const fixtures = {
     "zero-point": {
         "type": "FeatureCollection",
         "features": [
@@ -148,10 +148,10 @@ var fixtures = {
             }
         ]
     }
-}
+};
 
-for (var fixture in fixtures) {
-    var vtile = new mapnik.VectorTile(0, 0, 0);
+for (const fixture in fixtures) {
+    const vtile = new mapnik.VectorTile(0, 0, 0);
     vtile.addGeoJSON(JSON.stringify(fixtures[fixture]), "geojson");
     fs.writeFileSync('./test/fixtures/' + fixture + '.pbf', vtile.getData());
 }

@@ -1,9 +1,9 @@
-var test = require('tape'),
-    fs = require('fs'),
-    Protobuf = require('pbf'),
-    VectorTile = require('..').VectorTile,
-    VectorTileLayer = require('..').VectorTileLayer,
-    VectorTileFeature = require('..').VectorTileFeature;
+const test = require('tape');
+const fs = require('fs');
+const Protobuf = require('pbf');
+const VectorTile = require('..').VectorTile;
+const VectorTileLayer = require('..').VectorTileLayer;
+const VectorTileFeature = require('..').VectorTileFeature;
 
 function approximateDeepEqual(a, b, epsilon) {
     epsilon = epsilon || 1e-6;
@@ -15,8 +15,8 @@ function approximateDeepEqual(a, b, epsilon) {
     if (a === null || typeof a !== 'object')
         return a === b;
 
-    var ka = Object.keys(a);
-    var kb = Object.keys(b);
+    const ka = Object.keys(a);
+    const kb = Object.keys(b);
 
     if (ka.length != kb.length)
         return false;
@@ -24,7 +24,7 @@ function approximateDeepEqual(a, b, epsilon) {
     ka.sort();
     kb.sort();
 
-    for (var i = 0; i < ka.length; i++)
+    for (let i = 0; i < ka.length; i++)
         if (ka[i] != kb[i] || !approximateDeepEqual(a[ka[i]], b[ka[i]], epsilon))
             return false;
 
@@ -32,10 +32,10 @@ function approximateDeepEqual(a, b, epsilon) {
 }
 
 test('parsing vector tiles', function(t) {
-    var data = fs.readFileSync(__dirname + '/fixtures/14-8801-5371.vector.pbf');
+    const data = fs.readFileSync(__dirname + '/fixtures/14-8801-5371.vector.pbf');
 
     t.test('should have all layers', function(t) {
-        var tile = new VectorTile(new Protobuf(data));
+        const tile = new VectorTile(new Protobuf(data));
 
         t.deepEqual(Object.keys(tile.layers), [
             'landuse', 'waterway', 'water', 'barrier_line', 'building',
@@ -46,16 +46,16 @@ test('parsing vector tiles', function(t) {
     });
 
     t.test('should extract the tags of a feature', function(t) {
-        var tile = new VectorTile(new Protobuf(data));
+        const tile = new VectorTile(new Protobuf(data));
 
         t.equal(tile.layers.poi_label.length, 558);
 
-        var park = tile.layers.poi_label.feature(11);
+        const park = tile.layers.poi_label.feature(11);
 
         t.deepEqual(park.bbox(), [ 3898, 1731, 3898, 1731 ]);
 
         t.throws(function() {
-            var park = tile.layers.poi_label.feature(1e9);
+            const park = tile.layers.poi_label.feature(1e9);
         }, 'throws on reading a feature out of bounds');
 
         t.equal(park.id, 3000003150561);
@@ -72,9 +72,9 @@ test('parsing vector tiles', function(t) {
     });
 
     t.test('changing first point of a polygon should not change last point', function(t) {
-        var tile = new VectorTile(new Protobuf(data));
+        const tile = new VectorTile(new Protobuf(data));
 
-        var building = tile.layers.building.feature(0).loadGeometry();
+        const building = tile.layers.building.feature(0).loadGeometry();
         t.deepEqual(building, [ [ { x: 2039, y: -32 }, { x: 2035, y: -31 }, { x: 2032, y: -31 }, { x: 2032, y: -32 }, { x: 2039, y: -32 } ] ]);
         building[0][0].x = 1;
         building[0][0].y = 2;
@@ -85,7 +85,7 @@ test('parsing vector tiles', function(t) {
     });
 
     t.test('toGeoJSON', function(t) {
-        var tile = new VectorTile(new Protobuf(data));
+        const tile = new VectorTile(new Protobuf(data));
 
         t.ok(approximateDeepEqual(tile.layers.poi_label.feature(11).toGeoJSON(8801, 5371, 14), {
             type: 'Feature',
@@ -139,7 +139,7 @@ test('parsing vector tiles', function(t) {
         }));
 
         function geoJSONFromFixture(name) {
-            var tile = new VectorTile(new Protobuf(fs.readFileSync(__dirname + '/fixtures/' + name + '.pbf')));
+            const tile = new VectorTile(new Protobuf(fs.readFileSync(__dirname + '/fixtures/' + name + '.pbf')));
             return tile.layers.geojson.feature(0).toGeoJSON(0, 0, 0);
         }
 
@@ -185,13 +185,13 @@ test('parsing vector tiles', function(t) {
 });
 
 test('VectorTileLayer', function(t) {
-    var emptyLayer = new VectorTileLayer(new Protobuf(new Buffer([])));
+    const emptyLayer = new VectorTileLayer(new Protobuf(new Buffer([])));
     t.ok(emptyLayer, 'can be created with no values');
     t.end();
 });
 
 test('VectorTileFeature', function(t) {
-    var emptyFeature = new VectorTileFeature(new Protobuf(new Buffer([])));
+    const emptyFeature = new VectorTileFeature(new Protobuf(new Buffer([])));
     t.ok(emptyFeature, 'can be created with no values');
     t.ok(Array.isArray(VectorTileFeature.types));
     t.deepEqual(VectorTileFeature.types, ['Unknown', 'Point', 'LineString', 'Polygon']);
@@ -199,25 +199,25 @@ test('VectorTileFeature', function(t) {
 });
 
 test('https://github.com/mapbox/vector-tile-js/issues/15', function(t) {
-    var data = fs.readFileSync(__dirname + '/fixtures/lots-of-tags.vector.pbf');
-    var tile = new VectorTile(new Protobuf(data));
+    const data = fs.readFileSync(__dirname + '/fixtures/lots-of-tags.vector.pbf');
+    const tile = new VectorTile(new Protobuf(data));
     t.ok(tile.layers["stuttgart-rails"].feature(0));
     t.end();
 });
 
 test('https://github.com/mapbox/mapbox-gl-js/issues/1019', function(t) {
-    var data = fs.readFileSync(__dirname + '/fixtures/12-1143-1497.vector.pbf');
-    var tile = new VectorTile(new Protobuf(data));
+    const data = fs.readFileSync(__dirname + '/fixtures/12-1143-1497.vector.pbf');
+    const tile = new VectorTile(new Protobuf(data));
     t.ok(tile.layers["water"].feature(1).loadGeometry());
     t.end();
 });
 
 test('https://github.com/mapbox/vector-tile-js/issues/60', function(t) {
-    var data = fs.readFileSync(__dirname + '/fixtures/multipolygon-with-closepath.pbf');
-    var tile = new VectorTile(new Protobuf(data));
-    for (var id in tile.layers) {
-        var layer = tile.layers[id];
-        for (var i = 0; i < layer.length; i++) {
+    const data = fs.readFileSync(__dirname + '/fixtures/multipolygon-with-closepath.pbf');
+    const tile = new VectorTile(new Protobuf(data));
+    for (const id in tile.layers) {
+        const layer = tile.layers[id];
+        for (let i = 0; i < layer.length; i++) {
             layer.feature(i).loadGeometry();
         }
     }
