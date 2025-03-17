@@ -1,4 +1,11 @@
-## vector-tile-js changelog
+
+1.0.0 / 2025-03-16
+==================
+
+ * rename to @mapwhit/vector-tile
+ * replace Travis CI with github actions
+ * use biome and node:test
+ * modernize and cleanup code
 
 ### 1.3.1 (2017-03-02)
 
