@@ -1,0 +1,88 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "vcs": {
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "include": [
+      "meta",
+      "lib",
+      "test",
+      "*.js"
+    ],
+    "ignore": [
+      "package.json",
+      "build/",
+      "test/**/fixture"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "none",
+      "arrowParentheses": "asNeeded"
+    },
+    "globals": [
+      "arguments"
+    ]
+  },
+  "json": {
+    "formatter": {
+      "enabled": false
+    }
+  },
+  "css": {
+    "linter": {
+      "enabled": false
+    },
+    "formatter": {
+      "enabled": false
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noNodejsModules": "off",
+        "noUndeclaredVariables": "error"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noThisInStatic": "off",
+        "noUselessThisAlias":"off",
+        "useArrowFunction": "off",
+        "useLiteralKeys": "off"
+      },
+      "style": {
+        "noArguments": "off",
+        "noParameterAssign": "off",
+        "useDefaultParameterLast": "off",
+        "useNodejsImportProtocol": "off",
+        "useTemplate": "off"
+      },
+      "performance": {
+        "noDelete": "off"
+      },
+      "suspicious": {
+        "noAssignInExpressions": "off",
+        "noControlCharactersInRegex": "off",
+        "noFallthroughSwitchClause": "off",
+        "noGlobalIsNan": "off",
+        "noPrototypeBuiltins": "off",
+        "noShadowRestrictedNames": "off",
+        "useAwait": "error",
+        "useValidTypeof": "off"
+      }
+    }
+  }
+}

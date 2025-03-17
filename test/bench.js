@@ -1,36 +1,35 @@
-var Pbf = require('pbf'),
-    VectorTile = require('..').VectorTile,
-    Benchmark = require('benchmark'),
-    fs = require('fs');
+const fs = require('node:fs');
+const Pbf = require('@mapwhit/pbf');
+const Benchmark = require('benchmark');
 
-var suite = new Benchmark.Suite(),
-    data = fs.readFileSync(__dirname + '/fixtures/14-8801-5371.vector.Pbf');
+const { VectorTile } = require('..');
+const data = fs.readFileSync(__dirname + '/fixtures/14-8801-5371.vector.pbf');
+const suite = new Benchmark.Suite();
 
 readTile(); // output any errors before running the suite
 readTile(true);
 
 suite
-.add('read tile with geometries', function() {
+  .add('read tile with geometries', function () {
     readTile(true);
-})
-.add('read tile without geometries', function() {
+  })
+  .add('read tile without geometries', function () {
     readTile();
-})
-.on('cycle', function(event) {
+  })
+  .on('cycle', function (event) {
     console.log(String(event.target));
-})
-.run();
-
+  })
+  .run();
 
 function readTile(loadGeom, loadPacked) {
-    var buf = new Pbf(data),
-        vt = new VectorTile(buf);
+  const buf = new Pbf(data);
+  const vt = new VectorTile(buf);
 
-    for (var id in vt.layers) {
-        var layer = vt.layers[id];
-        for (var i = 0; i < layer.length; i++) {
-            var feature = layer.feature(i);
-            if (loadGeom) feature.loadGeometry();
-        }
+  for (const id in vt.layers) {
+    const layer = vt.layers[id];
+    for (let i = 0; i < layer.length; i++) {
+      const feature = layer.feature(i);
+      if (loadGeom) feature.loadGeometry();
     }
+  }
 }

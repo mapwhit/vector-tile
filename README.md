@@ -1,6 +1,10 @@
-# vector-tile
+[![NPM version][npm-image]][npm-url]
+[![Build Status][build-image]][build-url]
+[![Dependency Status][deps-image]][deps-url]
 
-[![build status](https://secure.travis-ci.org/mapbox/vector-tile-js.svg)](http://travis-ci.org/mapbox/vector-tile-js) [![Coverage Status](https://coveralls.io/repos/mapbox/vector-tile-js/badge.svg)](https://coveralls.io/r/mapbox/vector-tile-js)
+# @mapwhit/vector-tile
+
+Fork of [@mapbox/vector-tile]
 
 This library reads [Mapbox Vector Tiles](https://github.com/mapbox/vector-tile-spec) and allows access to the layers and features.
 
@@ -37,18 +41,6 @@ zlib.gunzip(data, function(err, buffer) {
     var tile = new VectorTile(new Protobuf(buffer));
 });
 ```
-
-## Depends
-
- - Node.js v0.10.x or v0.8.x
-
-
-## Install
-
-To install:
-
-    npm install @mapbox/vector-tile
-
 
 ## API Reference
 
@@ -102,3 +94,14 @@ An object that contains the data for a single feature.
   [Point](https://github.com/mapbox/point-geometry) arrays (with each point having `x` and `y` properties)
 - **bbox()** &mdash; calculates and returns the bounding box of the feature in the form `[x1, y1, x2, y2]`
 - **toGeoJSON(x, y, z)** &mdash; returns a GeoJSON representation of the feature. (`x`, `y`, and `z` refer to the containing tile's index.)
+
+[@mapbox/vector-tile]: https://npmjs.org/package/@mapbox/vector-tile
+
+[npm-image]: https://img.shields.io/npm/v/@mapwhit/vector-tile
+[npm-url]: https://npmjs.org/package/@mapwhit/vector-tile
+
+[build-url]: https://github.com/mapwhit/vector-tile/actions/workflows/check.yaml
+[build-image]: https://img.shields.io/github/actions/workflow/status/mapwhit/vector-tile/check.yaml?branch=main
+
+[deps-image]: https://img.shields.io/librariesio/release/npm/@mapwhit/vector-tile
+[deps-url]: https://libraries.io/npm/@mapwhit%2Fvector-tile
