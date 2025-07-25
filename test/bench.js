@@ -1,9 +1,9 @@
-const fs = require('node:fs');
-const Pbf = require('@mapwhit/pbf');
-const Benchmark = require('benchmark');
+import fs from 'node:fs';
+import Pbf from '@mapwhit/pbf';
+import Benchmark from 'benchmark';
+import { VectorTile } from '../index.js';
 
-const { VectorTile } = require('..');
-const data = fs.readFileSync(`${__dirname}/fixtures/14-8801-5371.vector.pbf`);
+const data = fs.readFileSync(`${import.meta.dirname}/fixtures/14-8801-5371.vector.pbf`);
 const suite = new Benchmark.Suite();
 
 readTile(); // output any errors before running the suite
