@@ -17,7 +17,7 @@ function approximateDeepEqual(a, b, epsilon = 1e-6) {
 }
 
 test('parsing vector tiles', async t => {
-  const data = fs.readFileSync(__dirname + '/fixtures/14-8801-5371.vector.pbf');
+  const data = fs.readFileSync(`${__dirname}/fixtures/14-8801-5371.vector.pbf`);
 
   await t.test('should have all layers', t => {
     const tile = new VectorTile(new Protobuf(data));
@@ -167,7 +167,7 @@ test('parsing vector tiles', async t => {
     );
 
     function geoJSONFromFixture(name) {
-      const tile = new VectorTile(new Protobuf(fs.readFileSync(__dirname + '/fixtures/' + name + '.pbf')));
+      const tile = new VectorTile(new Protobuf(fs.readFileSync(`${__dirname}/fixtures/${name}.pbf`)));
       return tile.layers.geojson.feature(0).toGeoJSON(0, 0, 0);
     }
 
@@ -344,19 +344,19 @@ test('VectorTileFeature', t => {
 });
 
 test('https://github.com/mapbox/vector-tile-js/issues/15', t => {
-  const data = fs.readFileSync(__dirname + '/fixtures/lots-of-tags.vector.pbf');
+  const data = fs.readFileSync(`${__dirname}/fixtures/lots-of-tags.vector.pbf`);
   const tile = new VectorTile(new Protobuf(data));
   t.assert.ok(tile.layers['stuttgart-rails'].feature(0));
 });
 
 test('https://github.com/mapbox/mapbox-gl-js/issues/1019', t => {
-  const data = fs.readFileSync(__dirname + '/fixtures/12-1143-1497.vector.pbf');
+  const data = fs.readFileSync(`${__dirname}/fixtures/12-1143-1497.vector.pbf`);
   const tile = new VectorTile(new Protobuf(data));
-  t.assert.ok(tile.layers['water'].feature(1).loadGeometry());
+  t.assert.ok(tile.layers.water.feature(1).loadGeometry());
 });
 
-test('https://github.com/mapbox/vector-tile-js/issues/60', t => {
-  const data = fs.readFileSync(__dirname + '/fixtures/multipolygon-with-closepath.pbf');
+test('https://github.com/mapbox/vector-tile-js/issues/60', () => {
+  const data = fs.readFileSync(`${__dirname}/fixtures/multipolygon-with-closepath.pbf`);
   const tile = new VectorTile(new Protobuf(data));
   for (const id in tile.layers) {
     const layer = tile.layers[id];

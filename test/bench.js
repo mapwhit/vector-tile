@@ -3,25 +3,25 @@ const Pbf = require('@mapwhit/pbf');
 const Benchmark = require('benchmark');
 
 const { VectorTile } = require('..');
-const data = fs.readFileSync(__dirname + '/fixtures/14-8801-5371.vector.pbf');
+const data = fs.readFileSync(`${__dirname}/fixtures/14-8801-5371.vector.pbf`);
 const suite = new Benchmark.Suite();
 
 readTile(); // output any errors before running the suite
 readTile(true);
 
 suite
-  .add('read tile with geometries', function () {
+  .add('read tile with geometries', () => {
     readTile(true);
   })
-  .add('read tile without geometries', function () {
+  .add('read tile without geometries', () => {
     readTile();
   })
-  .on('cycle', function (event) {
+  .on('cycle', event => {
     console.log(String(event.target));
   })
   .run();
 
-function readTile(loadGeom, loadPacked) {
+function readTile(loadGeom) {
   const buf = new Pbf(data);
   const vt = new VectorTile(buf);
 

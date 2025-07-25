@@ -1,23 +1,22 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "vcs": {
+    "enabled": true,
+    "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
     "ignoreUnknown": true,
-    "include": [
-      "meta",
-      "lib",
-      "test",
-      "*.js"
-    ],
-    "ignore": [
-      "package.json",
-      "build/",
-      "test/**/fixture"
+    "includes": [
+      "**",
+      "!test/fixtures"
     ]
   },
   "formatter": {
@@ -37,15 +36,7 @@
   },
   "json": {
     "formatter": {
-      "enabled": false
-    }
-  },
-  "css": {
-    "linter": {
-      "enabled": false
-    },
-    "formatter": {
-      "enabled": false
+      "expand": "always"
     }
   },
   "linter": {
@@ -53,35 +44,17 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noNodejsModules": "off",
-        "noUndeclaredVariables": "error"
-      },
-      "complexity": {
-        "noForEach": "off",
-        "noThisInStatic": "off",
-        "noUselessThisAlias":"off",
-        "useArrowFunction": "off",
-        "useLiteralKeys": "off"
+        "noUndeclaredVariables": "error",
+        "noUnusedVariables": "error"
       },
       "style": {
-        "noArguments": "off",
-        "noParameterAssign": "off",
-        "useDefaultParameterLast": "off",
-        "useNodejsImportProtocol": "off",
-        "useTemplate": "off"
-      },
-      "performance": {
-        "noDelete": "off"
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noUselessElse": "error"
       },
       "suspicious": {
-        "noAssignInExpressions": "off",
-        "noControlCharactersInRegex": "off",
-        "noFallthroughSwitchClause": "off",
-        "noGlobalIsNan": "off",
-        "noPrototypeBuiltins": "off",
-        "noShadowRestrictedNames": "off",
-        "useAwait": "error",
-        "useValidTypeof": "off"
+        "useAwait": "error"
       }
     }
   }

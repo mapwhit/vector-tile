@@ -9,10 +9,10 @@
   "license": "BSD-3-Clause",
   "main": "index.js",
   "dependencies": {
-    "@mapbox/point-geometry": "~0.1.0"
+    "@mapbox/point-geometry": "~1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "2.1.2",
     "@mapwhit/pbf": "^1.0.2",
     "benchmark": "^1.0.0"
   },
