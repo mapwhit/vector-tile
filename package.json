@@ -14,7 +14,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.1.2",
     "@mapwhit/pbf": "^1.0.2",
-    "benchmark": "^1.0.0"
+    "benchmark": "~2"
   },
   "files": [
     "index.js",
