@@ -12,7 +12,7 @@
     "@mapbox/point-geometry": "~0.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "2.1.2",
     "@mapwhit/pbf": "^1.0.2",
     "benchmark": "^1.0.0"
   },
