@@ -8,7 +8,7 @@
   "version": "2.0.0",
   "license": "BSD-3-Clause",
   "type": "module",
-  "export": "./index.js",
+  "exports": "./index.js",
   "dependencies": {
     "@mapbox/point-geometry": "~1"
   },
