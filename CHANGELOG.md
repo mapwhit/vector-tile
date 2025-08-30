@@ -1,4 +1,10 @@
 
+3.1.0 / 2025-08-30
+==================
+
+ * minor optimalization
+ * generate `Point` instances
+
 3.0.0 / 2025-08-08
 ==================
 
